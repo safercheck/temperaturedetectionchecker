@@ -1,0 +1,83 @@
+﻿<Window x:Class="IRTool.Views.ConfigHSRPView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+             xmlns:bbdef="clr-namespace:WpfMedia.BbCanvasDef;assembly=WpfMedia"
+             xmlns:resdef="clr-namespace:IRTool.ResourceDef"
+        
+        WindowStartupLocation="CenterOwner"
+        
+             mc:Ignorable="d" 
+             Width="900" Height="600">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfBase;component/Resources/style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="Black">
+                <Viewbox>
+                    <bbdef:BbCanvas x:Name="bbCanvas"></bbdef:BbCanvas>
+                </Viewbox>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" Style="{StaticResource gridsplitter_leftright}"></GridSplitter>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <xctk:PropertyGrid Grid.Row="0" x:Name="pgBbConfig"
+                        ShowTitle="False"
+                        ShowSearchBox="False" ShowSortOptions="False" ShowSummary="True"
+                        AutoGenerateProperties="True">
+                </xctk:PropertyGrid>
+
+                <TextBlock Grid.Row="1" x:Name="txtAutoInfo"
+                       FontWeight="Bold" Foreground="Red" TextWrapping="WrapWithOverflow"
+                       Text="{x:Static resdef:Loc.ConfigHSRP_Warn}"></TextBlock>
+                
+                <TextBlock Grid.Row="2" 
+                       FontWeight="Bold" Foreground="Blue" TextWrapping="WrapWithOverflow"
+                       Text="{x:Static resdef:Loc.ExtBb_Note}"></TextBlock>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#ff505050">
+            <Grid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource button_w100h25}"></Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" x:Name="btnRefresh" Click="btnRefresh_Click" Content="{x:Static resdef:Loc.GetTemp}"></Button>
+            <Button Grid.Column="2" x:Name="btnSave" Content="{x:Static resdef:Loc.Save}" Click="btnSave_Click"></Button>
+            <Button Grid.Column="3" x:Name="btnClose" Content="{x:Static resdef:Loc.Close}" Click="btnClose_Click"></Button>
+        </Grid>
+    </Grid>
+</Window>

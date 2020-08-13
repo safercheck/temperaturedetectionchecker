@@ -1,0 +1,98 @@
+﻿<Window x:Class="IRTool.Views.FDConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
+        xmlns:resdef="clr-namespace:IRTool.ResourceDef"
+        xmlns:fdcanvasdef="clr-namespace:IRTool.FDCanvasDef"
+
+        Title="{x:Static resdef:Loc.ConfigAlg}"
+        ShowInTaskbar="true"
+        WindowStartupLocation="CenterOwner"
+        Height="600" Width="1200">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfBase;component/Resources/style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#ff505050">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <ToggleButton Grid.Column="1" ToolTip="{x:Static resdef:Loc.Tool_Mouse}" x:Name="btnMouse" Style="{StaticResource togglebutton_w32h32}"
+                     Tag="{x:Static fdcanvasdef:ToolType.Mouse}">
+                    <Path Fill="Black" Data="M0,0 L24,8 L18,14 L30,24 L24,30 L14,18 L8,24 Z"></Path>
+                </ToggleButton>
+                <ToggleButton Grid.Column="2" ToolTip="{x:Static resdef:Loc.Tool_Select}" x:Name="btnSelect" Style="{StaticResource togglebutton_w32h32}" 
+                    Tag="{x:Static fdcanvasdef:ToolType.Select}">
+                    <Path Fill="White" Data="M0,0 L24,8 L18,14 L30,24 L24,30 L14,18 L8,24 Z"></Path>
+                </ToggleButton>
+                <!--<ToggleButton Grid.Column="3" ToolTip="{x:Static resdef:Loc.Tool_Shield}" x:Name="btnShield" Style="{StaticResource togglebutton_w32h32}"
+                     Tag="{x:Static fdcanvasdef:ToolType.Shield}">
+                    <Rectangle Stretch="Fill" Stroke="Black" StrokeThickness="2" Width="24" Height="24"></Rectangle>
+                </ToggleButton>-->
+                <ToggleButton Grid.Column="4" ToolTip="{x:Static resdef:Loc.Tool_Crop}" x:Name="btnCrop" Style="{StaticResource togglebutton_w32h32}" 
+                     Tag="{x:Static fdcanvasdef:ToolType.Crop}">
+                    <Image Source="{StaticResource crop_altDrawingImage}"></Image>
+                </ToggleButton>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Grid.Column="0" Background="#ff303030">
+            <Viewbox >
+                <fdcanvasdef:ConfigCanvas x:Name="configCanvas"></fdcanvasdef:ConfigCanvas>
+            </Viewbox>
+        </Grid>
+
+        <xctk:PropertyGrid Grid.Row="1" Grid.Column="1" x:Name="pgConfig"
+                           ShowSearchBox="False" ShowSortOptions="False" ShowTitle="False" ShowSummary="True"
+                           AutoGenerateProperties="True">
+        </xctk:PropertyGrid>
+
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid >
+                <Grid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource button_w100h25}"></Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" x:Name="btnSave" Content="{x:Static resdef:Loc.Save}" Click="btnSave_Click"></Button>
+                <Button Grid.Column="2" x:Name="btnSaveAndClose" Content="{x:Static resdef:Loc.SaveAndClose}" Click="btnSaveAndClose_Click"></Button>
+                <Button Grid.Column="3" x:Name="btnClose" Content="{x:Static resdef:Loc.Close}" Click="btnClose_Click"></Button>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</Window>
